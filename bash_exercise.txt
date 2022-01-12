@@ -1,0 +1,48 @@
+
+## Use this file to document the commands and write the results you get.
+
+
+
+#### 1. Download the data from https://drive.google.com/open?id=1TNZiSaNmcDbZ7fglKY7lPhni3ucD5Qn3
+cp cast.csv cast2.csv 
+head cast2.csv
+
+#### 2. How many rows does the dataset have?
+wc -l cast2.csv
+
+
+#### 3. Change the delimiter to ";"
+
+sed "s/,/;/g" cast2.csv >cast3.csv
+
+#### 4. Output the header into the separate file cast_header.csv and remove it from the data
+head -n 1 cast2.csv >cast_header.csv
+sed  "1d"  cast2.csv>cast4.csv
+#### 5. How many movies did Pierce Brosnan play in?
+ grep "Pierce Brosnan" cast2.csv >cast5.csv
+  wc -l cast5.csv
+  ====
+  grep "Pierce Brosnan" cast2.csv |wc -l
+  
+>>>>58 cast5.csv
+#### 6. Were there more superman movies or batman movies?
+grep "Superman" cast2.csv |wc -l
+>>>>1347
+grep "Batman" cast2.csv |wc -l
+>>>>1418
+#### 7. How many roles are in this database?
+cut -d "," -f 5 cast2.csv|sort| uniq -c| wc -l
+>>>>1509354
+#### 8. What is the most often played role?
+cut -d "," -f 5 cast2.csv|sort| uniq -c|sort -k "1rn"|head -n 1
+>>>>43297 actor
+#### 9. What is the most frequent movie name?
+cut -d ',' -f 1 cast2.csv|sort|uniq -c| sort -k "1rn" | head -n 5
+
+
+==========>sort -k "1rn"  : sorting by cul 1 in reverse
+>>>>1298 Around the World in Eighty Days
+    787 "Love
+    689 7 cajas
+    637 "Oh
+    580 Thelma
